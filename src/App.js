@@ -11,6 +11,7 @@ function App() {
   let [cnt, setCnt] = useState(0);
   let [modal, setModal] = useState(false);
   let [bNo, setBNo] = useState(0);
+  let [szInput, setSzInput] = useState('');
 
   let posts = '강남 고기 맛집';
 
@@ -64,7 +65,8 @@ function App() {
         */
         title.map(function(a, i){
           return (
-            <div className="list">
+            // map 반복문으로 돌린 HTML에는 key={}가 필요함
+            <div className="list" key={i}>
               <h3 onClick={ () => { modal ==  false ? setModal(!modal) : null;  setBNo(i); }}> 
                 {a} 
                 <span onClick={ ()=>{ 
@@ -81,6 +83,19 @@ function App() {
           )
         })
       }
+
+      <div className="publish">
+        <input id="addPost" onChange={ (e)=>{ setSzInput(e.target.value); } }/>
+        <button onClick={ ()=> {
+          var newArray = [...title];
+          newArray.push(szInput);
+          setTitle(newArray);
+          
+          var newUpArray = [...up];
+          newUpArray.push(0);
+          setUp(newUpArray);
+        } }>저장</button>
+      </div>
 
       <button onClick={ ()=>{ setModal(modal=false);} }> 상세 창 닫기 </button>
 
