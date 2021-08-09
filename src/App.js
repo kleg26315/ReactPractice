@@ -99,6 +99,8 @@ function App() {
 
       <button onClick={ ()=>{ setModal(modal=false);} }> 상세 창 닫기 </button>
 
+        <Profile></Profile>
+
       {
         /*
         JSX에선 if를 못 씀 -> 그래서 삼항연산자로 씀
@@ -149,5 +151,30 @@ function Modal(props){
   )
 }
 
+// 옛날 React 문법
+class Profile extends React.Component{
+  constructor(){
+    super();
+    // state는 constructor 안에 작성
+    this.state = { name : 'Kim', age : 27 }
+  }
+
+  // .bind(this)가 싫다면 arrow function으로 만들자
+  // changeName = () => {}
+  changeName(){
+    this.setState({name : 'Park'});
+  }
+
+
+  render(){
+    return (
+      <div>
+        <h3>프로필입니다</h3>
+        <p>저는 { this.state.name } 입니다. </p>
+        <button onClick={ this.changeName.bind(this) }>버튼</button>
+      </div>
+    )
+  }
+}
 
 export default App;
